@@ -10,4 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
+# include <stdio.h>
+# include <stdarg.h>
+# include <unistd.h>
+
+int ft_putstr(const char *s);
+int ft_putnbr(int n);
+int ft_printf(const char *str, ...);
+int ft_putchar(char r);
+int ft_puthexLow(int n);
+int ft_puthexUp(int n);
+
+
+# endif
