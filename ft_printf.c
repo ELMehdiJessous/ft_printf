@@ -29,6 +29,11 @@ int ft_handl(char r, va_list ap)
         count += ft_puthexUp(va_arg(ap, int));
     if (r == '%')
         count += ft_putchar(37);
+    if (r == 'p')
+        count += ft_pput(va_arg(ap,void *));
+    if (r == 'u')
+        count += ft_putunbr(va_arg(ap, unsigned int));
+        
     return (count);
 }
 
@@ -47,9 +52,9 @@ int ft_printf(const char *str, ...)
     while (*str)
     {
         if (*str == '%')
-            count+=ft_handl(*++str,ap);
+            count += ft_handl(*++str,ap);
         else
-            ft_putchar(*str);
+            count += write(1,&(*str),1);
         str++;
     }
     return (count);

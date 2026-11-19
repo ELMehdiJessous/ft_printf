@@ -21,8 +21,10 @@ int ft_putstr(const char *s);
 int ft_putnbr(int n);
 int ft_printf(const char *str, ...);
 int ft_putchar(char r);
-int ft_puthexLow(int n);
-int ft_puthexUp(int n);
+int ft_puthexLow(unsigned long n);
+int ft_puthexUp(unsigned long n);
+int ft_pput(void *p);
+int ft_putunbr(unsigned int n);
 
 
 # endif
