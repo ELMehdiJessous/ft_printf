@@ -1,15 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eljessou <eljessou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/19 11:14:31 by eljessou          #+#    #+#             */
+/*   Updated: 2026/11/19 22:50:34 by eljessou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
+
+int ft_putchar(char r)
+{
+    return (write(1,&r,1));
+}
 
 int ft_putstr(const char *s)
 {
     int i;
 
+    if (!s)
+        return (write(1,"(null)",6));
     i = 0;
     while (*s)
-    {
-        i +=write(1,&(*s),1);
-        s++;
-    }
+        i += ft_putchar(*s++);
     return (i);
 }
 
@@ -49,33 +65,24 @@ int ft_putunbr(unsigned int n)
     return (count);
 }
 
-int ft_putchar(char r)
+int ft_puthex(unsigned int n, char *hex)
 {
-    return (write(1,&r,1));
-}
-
-int ft_puthexLow(unsigned long n)
-{
-    char    *hex;
     int     count;
 
     count = 0;
-    hex = "0123456789abcdef";
     if (n >= 16)
-        count += ft_puthexLow(n / 16);
+        count += ft_puthex(n / 16, hex);
     count += write(1, &hex[n % 16], 1);
     return (count);
 }
 
-int ft_puthexUp(unsigned long n)
+int ft_p_pointer(unsigned long n, char *hex)
 {
-    char    *hex;
     int     count;
 
     count = 0;
-    hex = "0123456789ABCDEF";
     if (n >= 16)
-        count += ft_puthexUp(n / 16);
+        count += ft_puthex(n / 16, hex);
     count += write(1, &hex[n % 16], 1);
     return (count);
 }
@@ -88,5 +95,5 @@ int ft_pput(void *p)
     if (x ==  0)
         return (write(1,"(nil)",5));
     write (1,"0x",2);
-    return (2 + ft_puthexLow(x));
+    return (2 + ft_p_pointer(x,"0123456789abcdef"));
 }
