@@ -24,9 +24,9 @@ int ft_handl(char r, va_list ap)
     else if (r == 'c')
         count += ft_putchar(va_arg(ap, int));
     else if (r == 'x')
-        count += ft_puthex(va_arg(ap, int),"0123456789abcdef");
+        count += ft_puthex(va_arg(ap, unsigned int),"0123456789abcdef");
     else if (r == 'X')
-        count += ft_puthex(va_arg(ap, int),"0123456789ABCDEF");
+        count += ft_puthex(va_arg(ap, unsigned int),"0123456789ABCDEF");
     else if (r == '%')
         count += ft_putchar(37);
     else if (r == 'p')
@@ -63,6 +63,7 @@ int ft_printf(const char *str, ...)
             count += write(1,&(*str),1);
         str++;
     }
+    va_end(ap);
     return (count);
     
 }

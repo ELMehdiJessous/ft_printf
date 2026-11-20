@@ -82,7 +82,7 @@ int ft_p_pointer(unsigned long n, char *hex)
 
     count = 0;
     if (n >= 16)
-        count += ft_puthex(n / 16, hex);
+        count += ft_p_pointer(n / 16, hex);
     count += write(1, &hex[n % 16], 1);
     return (count);
 }
